@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Setup Guide - Digital Farewell Museum</title>
+  <style>
+    :root {
+      --primary: #6d28d9;
+      --primary-glow: rgba(109, 40, 217, 0.15);
+      --secondary: #0ea5e9;
+      --bg: #0b0f19;
+      --card-bg: #111827;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --border: #1f2937;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 40px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    header {
+      text-align: center;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 30px;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      background-color: rgba(109, 40, 217, 0.1);
+      border: 1px solid rgba(109, 40, 217, 0.3);
+      color: #c084fc;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin: 0 0 10px 0;
+      background: linear-gradient(135deg, #ffffff, #a5b4fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin: 0;
+    }
+
+    h2 {
+      font-size: 20px;
+      color: #ffffff;
+      border-left: 4px solid var(--primary);
+      padding-left: 12px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: var(--text-muted);
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    ul, ol {
+      margin: 0 0 20px 0;
+      padding-left: 20px;
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    li strong {
+      color: #ffffff;
+    }
+
+    code {
+      font-family: 'Consolas', 'Courier New', monospace;
+      background-color: #030712;
+      color: #38bdf8;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 13px;
+      border: 1px solid #1f2937;
+    }
+
+    pre {
+      background-color: #030712;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+
+    pre code {
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      color: #f3f4f6;
+      font-size: 13px;
+    }
+
+    .highlight-box {
+      background-color: rgba(14, 165, 233, 0.03);
+      border: 1px dashed rgba(14, 165, 233, 0.25);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 20px 0;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      font-size: 14px;
+      color: #7dd3fc;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-cols: 1fr 1fr;
+      gap: 16px;
+      margin: 25px 0;
+    }
+
+    .feature-card {
+      background-color: #1f2937;
+      border: 1px solid #374151;
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .feature-card h3 {
+      margin: 0 0 8px 0;
+      font-size: 14px;
+      color: #c084fc;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .feature-card p {
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    footer {
+      margin-top: 50px;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    .btn-print {
+      display: block;
+      width: 160px;
+      margin: 20px auto 0 auto;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #ffffff;
+      border: none;
+      border-radius: 20px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(109, 40, 217, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .btn-print:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(109, 40, 217, 0.4);
+    }
+
+    /* Print Styles to force beautiful PDF conversion */
+    @media print {
+      body {
+        background-color: #ffffff;
+        color: #000000;
+      }
+      .container {
+        border: none;
+        box-shadow: none;
+        background-color: #ffffff;
+        padding: 0;
+        margin: 0;
+        max-width: 100%;
+      }
+      .btn-print {
+        display: none;
+      }
+      h1, h2, h3, li strong {
+        color: #000000 !important;
+      }
+      p, li, ul, ol {
+        color: #333333 !important;
+      }
+      code, pre {
+        background-color: #f3f4f6;
+        border: 1px solid #d1d5db;
+        color: #000000;
+      }
+      pre code {
+        color: #000000;
+      }
+      .highlight-box {
+        background-color: #eff6ff;
+        border: 1px dashed #bfdbfe;
+      }
+      .highlight-box p {
+        color: #1e40af;
+      }
+      .feature-card {
+        background-color: #f9fafb;
+        border: 1px solid #e5e7eb;
+      }
+      .feature-card h3 {
+        color: #7c3aed;
+      }
+      footer {
+        color: #6b7280;
+        border-top: 1px solid #e5e7eb;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="badge">Class of 2026 Special</div>
+      <h1>WE LEAVE AS MEMORIES</h1>
+      <p class="subtitle">Digital Farewell Museum - Developer Guide</p>
+    </header>
+
+    <main>
+      <p>This developer guide provides step-by-step instructions for extracting, compiling, and running the interactive cinematic college farewell website.</p>
+
+      <h2>📋 Core Prerequisites</h2>
+      <p>Before launching the server, please verify that the host machine has the following dependencies installed:</p>
+      <ul>
+        <li><strong>Node.js:</strong> Version <code>18.0.0</code> or higher (LTS version highly recommended).</li>
+        <li><strong>NPM:</strong> Bundled natively with Node.js to manage asset dependencies.</li>
+        <li><strong>Modern Browser:</strong> Google Chrome, Microsoft Edge, Brave, or Safari (supporting standard Web Audio API).</li>
+      </ul>
+
+      <h2>🛠️ Quick Installation Steps</h2>
+      <ol>
+        <li><strong>Extract Archives:</strong> If the folder was delivered as a compressed <code>.zip</code> file, extract the entire directory to a designated folder on your local drive.</li>
+        <li><strong>Open Command Terminal:</strong> Navigate inside the folder, click the address bar, type <code>cmd</code> (or <code>powershell</code>), and press Enter. Alternatively, open the directory inside VS Code and open the integrated terminal.</li>
+        <li><strong>Install Node Packages:</strong> Run the following command in the terminal to resolve all modular animation packages:</li>
+      </ol>
+      <pre><code>npm install --legacy-peer-deps</code></pre>
+      <p><em>Note: The <code>--legacy-peer-deps</code> flag ensures seamless package alignment under React 19 dependencies.</em></p>
+
+      <h2>🚀 How to Run the Website</h2>
+      <p>The website includes scripts for both developer sandbox live testing and production-optimized compilation:</p>
+      
+      <h3>1. Active Development Server (Live HMR)</h3>
+      <p>To run the website in hot-reload live mode, execute:</p>
+      <pre><code>npm run dev</code></pre>
+      <p>Hold Ctrl and click the local URL generated in your console, or open your web browser and navigate directly to:</p>
+      <pre><code>http://localhost:5173/</code></pre>
+
+      <h3>2. Production Optimization Compilation</h3>
+      <p>To build a lightweight, minified, high-performance static site package for direct hosting:</p>
+      <pre><code>npm run build</code></pre>
+      <p>To preview the optimized production build locally:</p>
+      <pre><code>npm run preview</code></pre>
+
+      <div class="highlight-box">
+        <p>💡 <strong>Headphones Recommended:</strong> The website contains an offline-synthesized ambient space piano soundtrack. Be sure to turn on audio after clicking "Enter Memory Vault" to experience it!</p>
+      </div>
+
+      <h2>💎 Architectural Engineering Features</h2>
+      <p>Below is a brief summary of the luxury interaction models programmed into this tribute page:</p>
+      
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>Web Audio Synth</h3>
+          <p>An offline-synthesized space piano that plays a beautiful, nostalgic chord progression on the fly without heavy external audio files.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Anti-Gravity Starfield</h3>
+          <p>A background particle canvas. Stars drift upward and are gently pushed away from the user cursor in an anti-gravity field.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Memory Vault</h3>
+          <p>Glass cards grouped by category. Features expandable full views, dynamic simulated uploads, and tape-hiss voice echo wave bars.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Farewell Theatre</h3>
+          <p>Chapter selector with 3D tilts. Pulls back theatre curtains on click and projects abstract dreamscapes on canvas screens.</p>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>DESIGNED & DEVELOPED BY ARSHAD AND TEAM // SENIOR FAREWELL TRIBUTE CLASS OF 2026</p>
+      <button class="btn-print" onclick="window.print()">Export as PDF</button>
+    </footer>
+  </div>
+
+</body>
+</html>
